@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static:
+    name: lint / type / contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install
+        run: pip install -e . --group dev
+      - name: Shipped-content guard
+        run: python scripts/check_shipped_content.py
+      - name: Ruff
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Mypy
+        run: mypy
+      - name: Import contracts (core purity)
+        run: lint-imports
+
+  test:
+    name: test (py${{ matrix.python }} / ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Install
+        run: pip install -e . --group dev
+      - name: Gates (prefix property, parity)
+        shell: bash
+        # Exit code 5 = no tests collected; tolerated only until the gate suite lands.
+        run: pytest -m gate --exitfirst || { rc=$?; [ "$rc" -eq 5 ] && echo "no gate tests collected yet"; [ "$rc" -eq 5 ]; }
+      - name: Unit tests
+        run: pytest
