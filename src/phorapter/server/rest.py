@@ -132,8 +132,9 @@ def create_app(
     )
     app.state.service = service
 
-    # Middleware runs in reverse registration order: log outermost, then auth,
-    # then request-id innermost — so the id is set before auth and logging read it.
+    # add_middleware prepends, so the last one added is outermost and runs first.
+    # Order the request reaches them: request-id (outermost) -> auth -> log
+    # (innermost) -> route, so the id is set before auth and logging read it.
     app.add_middleware(RequestLogMiddleware)
     app.add_middleware(BearerAuthMiddleware, api_key=settings.server.api_key)
     app.add_middleware(RequestIdMiddleware)
