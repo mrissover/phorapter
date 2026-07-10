@@ -49,6 +49,15 @@ Changelog = "https://github.com/impluvium-software/phorapter/blob/main/CHANGELOG
 [project.scripts]
 phorapter = "phorapter.__main__:main"
 
+# Community adapters register themselves under the same groups; see docs/adapters.md.
+[project.entry-points."phorapter.stores"]
+memory = "phorapter.stores.memory:InMemoryStore"
+qdrant = "phorapter.stores.qdrant:QdrantStore"
+
+[project.entry-points."phorapter.embedders"]
+ollama = "phorapter.embed.ollama:OllamaEmbedder"
+openai_compat = "phorapter.embed.openai_compat:OpenAICompatEmbedder"
+
 [dependency-groups]
 dev = [
   "pytest>=8.3",
@@ -61,6 +70,7 @@ dev = [
   "datamodel-code-generator>=0.26",
   "schemathesis>=3.38",
   "hatch>=1.13",
+  "testcontainers>=4.8",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -94,6 +104,14 @@ files = ["src/phorapter"]
 [[tool.mypy.overrides]]
 module = "phorapter.server.schemas"
 ignore_errors = true # generated file
+
+# Third-party libraries pulled in transitively (via qdrant-client) that ship no
+# usable stubs for our target version, or whose stubs use newer-Python syntax.
+[[tool.mypy.overrides]]
+module = ["qdrant_client", "qdrant_client.*", "numpy", "numpy.*", "grpc", "grpc.*"]
+follow_imports = "skip"
+follow_imports_for_stubs = true
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
