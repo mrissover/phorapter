@@ -9,3 +9,12 @@ may change on minor versions).
 
 ### Added
 - Project scaffold: packaging, lint/type/test tooling, CI, core-purity import contracts.
+- Core library: validated multi-size grid, multi-view slicer, structural markers,
+  deterministic slice IDs, token counting, and the correctness gates (prefix
+  property + cross-implementation parity).
+- Storage and embedding: vector-store SPI with in-memory and Qdrant adapters, an
+  adapter conformance suite, and the embedder SPI (Ollama, OpenAI-compatible,
+  and a deterministic fake).
+- Right-sizing engine: containment forest, cross-size rank fusion, and the greedy
+  upward selection strategy with a full substitution trace, plus the in-process
+  `budget_fit` entry point.

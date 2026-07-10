@@ -8,6 +8,8 @@ the ``server`` extra.
 from importlib.metadata import PackageNotFoundError, version
 
 from phorapter.errors import GridError, PhorapterError, SlicingError, TokenizerError
+from phorapter.forest import ContainmentAnomaly, ContainmentForest, Edge, contains
+from phorapter.fusion import RankFusion, RawScorePool, TierInterleave
 from phorapter.grid import DEFAULT_GRID, GridSpec
 from phorapter.ids import PHORAPTER_NAMESPACE, slice_name, slice_uuid
 from phorapter.markers import MARKER_HEX_LENGTH, marker_for_bytes, marker_for_text
@@ -18,6 +20,18 @@ from phorapter.model import (
     Slice,
     SlicedDocument,
     SliceRef,
+)
+from phorapter.selection import (
+    DedupeOnly,
+    EvidenceItem,
+    GreedyUpwardStrategy,
+    SelectedSlice,
+    Selection,
+    SelectionOptions,
+    SelectionRequest,
+    SelectionStrategy,
+    SliceSource,
+    budget_fit,
 )
 from phorapter.slicer import multi_view_slice
 from phorapter.tokens import (
@@ -40,19 +54,36 @@ __all__ = [
     "MARKER_HEX_LENGTH",
     "PHORAPTER_NAMESPACE",
     "CandidateHit",
+    "ContainmentAnomaly",
+    "ContainmentForest",
+    "DedupeOnly",
+    "Edge",
+    "EvidenceItem",
+    "GreedyUpwardStrategy",
     "GridError",
     "GridSpec",
     "HitProvenance",
     "PhorapterError",
+    "RankFusion",
+    "RawScorePool",
     "RetrievedHit",
+    "SelectedSlice",
+    "Selection",
+    "SelectionOptions",
+    "SelectionRequest",
+    "SelectionStrategy",
     "Slice",
     "SliceRef",
+    "SliceSource",
     "SlicedDocument",
     "SlicingError",
+    "TierInterleave",
     "TiktokenCounter",
     "TokenCounter",
     "TokenizerError",
     "__version__",
+    "budget_fit",
+    "contains",
     "get_counter",
     "marker_for_bytes",
     "marker_for_text",
