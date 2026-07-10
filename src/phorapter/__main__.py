@@ -5,7 +5,9 @@ Subcommands:
 - ``serve`` — run the REST API (with the MCP server mounted at ``/mcp``) under
   uvicorn;
 - ``mcp`` — run the MCP server over stdio, for a local MCP client;
-- ``check`` — validate startup (store reachable, embedder probed) and exit 0/1.
+- ``check`` — validate startup (store reachable, embedder probed) and exit 0/1;
+- ``eval`` — offline evaluation harness (``forest`` / ``budget`` / ``regress``)
+  against a running server (requires the ``eval`` extra).
 
 ``--version`` reports the installed version and exits.
 """
@@ -31,6 +33,11 @@ def _build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("mcp", help="run the MCP server over stdio")
     sub.add_parser("check", help="validate startup and exit 0 (ok) or 1 (degraded)")
+    sub.add_parser(
+        "eval",
+        help="offline evaluation harness (forest/budget/regress); see 'phorapter eval --help'",
+        add_help=False,
+    )
     return parser
 
 
@@ -106,6 +113,15 @@ def _check() -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
+    import sys
+
+    # `eval` owns its own argument grammar; hand it the remaining argv untouched.
+    argv = sys.argv[1:] if argv is None else argv
+    if argv and argv[0] == "eval":
+        from phorapter.eval import main as eval_main
+
+        return eval_main(argv[1:])
+
     parser = _build_parser()
     args = parser.parse_args(argv)
     if args.command == "serve":

@@ -33,9 +33,15 @@ budgeting a sequence of safe, explainable moves.
 
 ## Documentation
 
-See [`docs/`](docs/) — start with [architecture](docs/architecture.md) and
-[concepts](docs/concepts.md). The REST contract of record is
-[`api/openapi.yaml`](api/openapi.yaml).
+- **Start here:** [concepts](docs/concepts.md) (the method) and
+  [architecture](docs/architecture.md) (the system).
+- **Quickstarts:** [library](docs/quickstart-library.md) (in-process) ·
+  [server](docs/quickstart-server.md) (REST + MCP).
+- **Reference:** [engine](docs/engine.md) (right-sizing) ·
+  [api](docs/api.md) + [`api/openapi.yaml`](api/openapi.yaml) (REST) ·
+  [mcp](docs/mcp.md) · [adapters](docs/adapters.md) (SPIs) ·
+  [operations](docs/operations.md) · [evaluation](docs/evaluation.md).
+- **Rationale:** [decisions](docs/decisions.md) (the design log).
 
 ## License
 

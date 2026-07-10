@@ -39,13 +39,13 @@ Phorapter is one package with two faces:
 | `ids` | Deterministic UUIDv5 slice identity | ✔ |
 | `slicer` | `multi_view_slice()`: encode-once multi-size slicing with descendants | ✔ |
 | `tokens` | `TokenCounter` protocol, tiktoken default, registry | ✔ |
-| `forest` | Containment forest over retrieved hits | *(planned)* |
-| `fusion` | Cross-size rank fusion (tier interleave) | *(planned)* |
-| `selection` | `SelectionStrategy` SPI, greedy upward trade-up, substitution trace | *(planned)* |
-| `stores` | `VectorStoreAdapter` SPI, in-memory + Qdrant adapters | *(planned)* |
-| `embed` | `Embedder` SPI, Ollama + OpenAI-compatible providers | *(planned)* |
-| `service` / `server` | Async orchestration; REST + MCP skins | *(planned)* |
-| `eval` | Offline forest/budget metrics and regression gating | *(planned)* |
+| `forest` | Containment forest over retrieved hits | ✔ |
+| `fusion` | Cross-size rank fusion (tier interleave) | ✔ |
+| `selection` | `SelectionStrategy` SPI, greedy upward trade-up, substitution trace | ✔ |
+| `stores` | `VectorStoreAdapter` SPI, in-memory + Qdrant adapters | ✔ |
+| `embed` | `Embedder` SPI, Ollama + OpenAI-compatible providers | ✔ |
+| `service` / `server` | Async orchestration; REST + MCP skins | ✔ |
+| `eval` | Offline forest/budget metrics and regression gating | ✔ |
 
 ## Design rules
 
@@ -67,7 +67,7 @@ Phorapter is one package with two faces:
   (corpus, size, query) triple only. Nothing in the system compares raw scores
   across sizes or synthesizes a "global" score.
 
-## The query pipeline *(planned — specified in [engine.md](engine.md))*
+## The query pipeline (specified in [engine.md](engine.md))
 
 ```
 embed once → fan out per size (parallel, partial-failure tolerant)

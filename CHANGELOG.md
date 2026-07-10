@@ -18,3 +18,10 @@ may change on minor versions).
 - Right-sizing engine: containment forest, cross-size rank fusion, and the greedy
   upward selection strategy with a full substitution trace, plus the in-process
   `budget_fit` entry point.
+- Server: an OpenAPI 3.1 contract of record with generated DTOs, a FastAPI REST
+  surface and a FastMCP surface over a shared async service layer, structured
+  logging, optional bearer auth, and the `serve` / `mcp` / `check` CLI.
+- Operations: a Dockerfile (tiktoken vocabulary baked in), a dev docker-compose
+  stack, and a PyPI trusted-publishing release workflow.
+- Evaluation harness (`phorapter eval forest|budget|regress`): forest-density and
+  budget-utilization metrics with deterministic regression gating.
