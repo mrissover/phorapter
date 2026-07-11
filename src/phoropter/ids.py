@@ -21,10 +21,10 @@ import uuid
 
 __all__ = ["PHOROPTER_NAMESPACE", "slice_name", "slice_uuid"]
 
-PHOROPTER_NAMESPACE = uuid.UUID("8cf4930b-46ed-52c5-afc3-66aa6543e8fd")
+PHOROPTER_NAMESPACE = uuid.UUID("fabb402a-1e0f-55a8-83cd-2d0a124a3fca")
 """The project's UUIDv5 namespace.
 
-Derived once as ``uuid5(NAMESPACE_DNS, "phoropter.impluvium")`` and
+Derived once as ``uuid5(NAMESPACE_DNS, "phoropter.impluvium.software")`` and
 hard-coded; a pinned test guards both the value and its derivation.
 """
 

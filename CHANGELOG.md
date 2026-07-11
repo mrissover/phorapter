@@ -7,12 +7,6 @@ may change on minor versions).
 
 ## [Unreleased]
 
-### Changed
-- Shortened the UUIDv5 namespace seed to `phoropter.impluvium`, which changes
-  `PHOROPTER_NAMESPACE` and every derived slice point ID. Harmless now (nothing
-  is indexed against the previous namespace); once corpora exist in the wild this
-  kind of change would require a reindex.
-
 ## [0.1.0] - 2026-07-10
 
 First public release. Phoropter slices documents at multiple sizes on a shared
