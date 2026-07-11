@@ -7,6 +7,14 @@ may change on minor versions).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-07-10
+
+First public release. Phoropter slices documents at multiple sizes on a shared
+origin-aligned grid, detects containment between retrieved slices exactly (by
+construction, verified with SHA-256 markers), and right-sizes context under a
+token budget by discarding contained duplicates and trading small slices up to
+their enclosing parents. Ships as an embeddable library and a REST + MCP server.
+
 ### Added
 - Project scaffold: packaging, lint/type/test tooling, CI, core-purity import contracts.
 - Core library: validated multi-size grid, multi-view slicer, structural markers,

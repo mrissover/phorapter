@@ -34,6 +34,10 @@ jobs:
   publish-pypi:
     name: Publish to PyPI
     needs: build
+    # Opt-in: skipped until PyPI trusted publishing is configured and the repo
+    # variable PUBLISH_TO_PYPI is set to "true". Keeps tags from failing on an
+    # unconfigured publish; the GitHub release below still runs.
+    if: ${{ vars.PUBLISH_TO_PYPI == 'true' }}
     runs-on: ubuntu-latest
     environment: release
     steps:

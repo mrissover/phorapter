@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "phoropter"
-version = "0.1.0.dev0"
+version = "0.1.0"
 description = "Multi-view RAG server: multi-size origin-aligned slicing, exact containment detection, and token-budgeted context right-sizing."
 readme = "README.md"
 requires-python = ">=3.11"
