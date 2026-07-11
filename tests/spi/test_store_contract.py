@@ -20,21 +20,21 @@ from dataclasses import FrozenInstanceError, replace
 
 import pytest
 
-from phorapter import DEFAULT_GRID, GridSpec, multi_view_slice
-from phorapter.errors import (
+from phoropter import DEFAULT_GRID, GridSpec, multi_view_slice
+from phoropter.errors import (
     CorpusExistsError,
     CorpusMismatchError,
     CorpusNotFoundError,
     DocumentNotFoundError,
 )
-from phorapter.model import Slice
-from phorapter.stores import (
+from phoropter.model import Slice
+from phoropter.stores import (
     CorpusConfig,
     DocumentRecord,
     SlicePoint,
     VectorStoreAdapter,
 )
-from phorapter.stores.memory import InMemoryStore
+from phoropter.stores.memory import InMemoryStore
 
 DIM = 8
 
@@ -87,7 +87,7 @@ async def _qdrant_store() -> AsyncIterator[VectorStoreAdapter]:
     from testcontainers.core.container import DockerContainer
     from testcontainers.core.waiting_utils import wait_for_logs
 
-    from phorapter.stores.qdrant import QdrantStore
+    from phoropter.stores.qdrant import QdrantStore
 
     container = DockerContainer("qdrant/qdrant:v1.12.4").with_exposed_ports(6333)
     try:
@@ -101,7 +101,7 @@ async def _qdrant_store() -> AsyncIterator[VectorStoreAdapter]:
     try:
         host = container.get_container_host_ip()
         port = container.get_exposed_port(6333)
-        store = QdrantStore(url=f"http://{host}:{port}", prefix="phorapter_test")
+        store = QdrantStore(url=f"http://{host}:{port}", prefix="phoropter_test")
         await store.bootstrap()
         yield store
         with contextlib.suppress(Exception):
@@ -205,7 +205,7 @@ class TestUpsertAndSearch:
 
     async def test_fetch_unknown_ids_omitted(self, store: VectorStoreAdapter) -> None:
         await store.create_corpus(_config("docs"))
-        from phorapter.model import SliceRef
+        from phoropter.model import SliceRef
 
         missing = SliceRef("ghost", 64, 0).uuid()
         assert await store.fetch_by_ids("docs", 64, [missing]) == []

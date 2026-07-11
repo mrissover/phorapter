@@ -2,7 +2,7 @@
 
 import unicodedata
 
-from phorapter import marker_for_bytes, marker_for_text
+from phoropter import marker_for_bytes, marker_for_text
 
 
 def test_sha256_empty_known_answer() -> None:

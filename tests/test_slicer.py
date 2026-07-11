@@ -2,7 +2,7 @@
 
 import pytest
 
-from phorapter import DEFAULT_GRID, GridSpec, SlicingError, multi_view_slice
+from phoropter import DEFAULT_GRID, GridSpec, SlicingError, multi_view_slice
 
 
 class CharCounter:

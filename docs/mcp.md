@@ -1,12 +1,12 @@
 # MCP tools
 
-Phorapter exposes an [MCP](https://modelcontextprotocol.io) server so a
+Phoropter exposes an [MCP](https://modelcontextprotocol.io) server so a
 language-model client can retrieve right-sized context directly. It runs two
 ways:
 
-- **Streamable HTTP**, mounted at `/mcp` by `phorapter serve` (same process as
+- **Streamable HTTP**, mounted at `/mcp` by `phoropter serve` (same process as
   the REST API);
-- **stdio**, via `phorapter mcp`, for a local MCP client that launches the
+- **stdio**, via `phoropter mcp`, for a local MCP client that launches the
   server as a subprocess.
 
 Both surfaces call the same service core as REST — there is no separate business
@@ -15,7 +15,7 @@ versa.
 
 ## Tools
 
-### `phorapter_query` (always available)
+### `phoropter_query` (always available)
 
 Retrieve right-sized context for a natural-language query. The server searches
 the corpus at several slice sizes, removes duplicate nested passages, and — within
@@ -38,15 +38,15 @@ a `text` block for direct reading. Each text block is headed
 from the text rendering: they are ordinal within one slice size only and are
 misleading when read across sizes.
 
-### `phorapter_list_corpora` (always available)
+### `phoropter_list_corpora` (always available)
 
 List the names of the corpora available on the server.
 
-### `phorapter_add_document` / `phorapter_delete_document` (opt-in)
+### `phoropter_add_document` / `phoropter_delete_document` (opt-in)
 
 Write tools that add/replace and delete documents. They ship but are **disabled
 by default**. Enable them by setting `mcp.enable_document_tools = true` (or
-`PHORAPTER_MCP__ENABLE_DOCUMENT_TOOLS=true`). When disabled they are not
+`PHOROPTER_MCP__ENABLE_DOCUMENT_TOOLS=true`). When disabled they are not
 registered at all, so a client never sees them.
 
 ## Budget semantics
@@ -64,7 +64,7 @@ time.
 ## Enabling and mounting
 
 ```toml
-# phorapter.toml
+# phoropter.toml
 [mcp]
 enable_document_tools = false   # set true to expose the write tools
 default_token_budget = 4000
@@ -73,11 +73,11 @@ default_token_budget = 4000
 Run the combined REST + MCP server:
 
 ```console
-$ phorapter serve            # REST under /v1, MCP under /mcp
+$ phoropter serve            # REST under /v1, MCP under /mcp
 ```
 
 Or run MCP alone over stdio for a local client:
 
 ```console
-$ phorapter mcp
+$ phoropter mcp
 ```

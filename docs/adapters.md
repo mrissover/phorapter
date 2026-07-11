@@ -1,6 +1,6 @@
 # Adapters (SPIs)
 
-Phorapter never hard-codes a vector store, an embedding model, or a tokenizer.
+Phoropter never hard-codes a vector store, an embedding model, or a tokenizer.
 Each is a small provider interface (SPI) with a shipped default and a plugin
 mechanism. This document is the reference for implementing your own.
 
@@ -10,12 +10,12 @@ mechanism. This document is the reference for implementing your own.
 
 All three are discovered through Python entry-point groups, so a third-party
 package can register a provider just by declaring an entry point — no changes to
-phorapter.
+phoropter.
 
 | SPI | Entry-point group | Shipped |
 |---|---|---|
-| Vector store | `phorapter.stores` | `memory`, `qdrant` |
-| Embedder | `phorapter.embedders` | `fake`, `ollama`, `openai_compat` |
+| Vector store | `phoropter.stores` | `memory`, `qdrant` |
+| Embedder | `phoropter.embedders` | `fake`, `ollama`, `openai_compat` |
 | Token counter | (registered in-process) | `tiktoken:*` |
 
 ## VectorStoreAdapter
@@ -130,7 +130,7 @@ class Embedder(ABC):
     def fingerprint(self) -> str                                      # "provider:model"
 ```
 
-Phorapter learns a corpus's embedding dimension by **probing** — embedding a
+Phoropter learns a corpus's embedding dimension by **probing** — embedding a
 fixed text and measuring the vector — never by trusting a provider metadata
 endpoint. The `"provider:model"` fingerprint is pinned into the corpus at
 creation; data embedded by anything else is refused. `embed` owns its own
@@ -164,10 +164,10 @@ the core library imports and runs without it.
 Declare an entry point in your package's `pyproject.toml`:
 
 ```toml
-[project.entry-points."phorapter.stores"]
+[project.entry-points."phoropter.stores"]
 myrstore = "mypkg.store:MyStore"
 
-[project.entry-points."phorapter.embedders"]
+[project.entry-points."phoropter.embedders"]
 myembedder = "mypkg.embed:MyEmbedder"
 ```
 

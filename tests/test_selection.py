@@ -5,9 +5,9 @@ from __future__ import annotations
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from phorapter import DEFAULT_GRID, multi_view_slice
-from phorapter.model import HitProvenance, RetrievedHit, Slice
-from phorapter.selection import (
+from phoropter import DEFAULT_GRID, multi_view_slice
+from phoropter.model import HitProvenance, RetrievedHit, Slice
+from phoropter.selection import (
     DedupeOnly,
     SelectionOptions,
     budget_fit,
@@ -69,9 +69,9 @@ class TestDedup:
 
 def budget_fit_request(hits, *, budget, counter):
     # Build the same request budget_fit would, for strategies under test.
-    from phorapter.forest import ContainmentForest
-    from phorapter.fusion import TierInterleave
-    from phorapter.selection import SelectionRequest
+    from phoropter.forest import ContainmentForest
+    from phoropter.fusion import TierInterleave
+    from phoropter.selection import SelectionRequest
 
     by_size: dict[int, list] = {}
     for h in hits:

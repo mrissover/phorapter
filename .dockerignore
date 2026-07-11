@@ -27,5 +27,5 @@ Dockerfile
 .gitignore
 .gitattributes
 .pre-commit-config.yaml
-phorapter.toml
+phoropter.toml
 .env

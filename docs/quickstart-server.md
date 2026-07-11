@@ -4,7 +4,7 @@ The server wraps the core with REST and MCP surfaces over a pluggable vector sto
 (Qdrant by default) and embedder (Ollama by default).
 
 ```bash
-pip install "phorapter[server,qdrant]"
+pip install "phoropter[server,qdrant]"
 ```
 
 ## Bring up the stack
@@ -19,11 +19,11 @@ docker compose -f docker-compose.dev.yml up --build
 Or run the server directly against your own Qdrant and Ollama:
 
 ```bash
-export PHORAPTER_STORE__URL=http://localhost:6333
-export PHORAPTER_EMBEDDER__PROVIDER=ollama
-export PHORAPTER_EMBEDDER__MODEL=nomic-embed-text
-phorapter check     # confirm the store and embedder are reachable
-phorapter serve
+export PHOROPTER_STORE__URL=http://localhost:6333
+export PHOROPTER_EMBEDDER__PROVIDER=ollama
+export PHOROPTER_EMBEDDER__MODEL=nomic-embed-text
+phoropter check     # confirm the store and embedder are reachable
+phoropter serve
 ```
 
 ## Create a corpus, add a document, query it
@@ -54,19 +54,19 @@ trace. See [api.md](api.md) for the complete contract, and
 
 ## Use it from an LLM (MCP)
 
-The server mounts an MCP endpoint at `/mcp`, exposing a `phorapter_query` tool
-(and `phorapter_list_corpora`). An MCP-capable model can call it directly to pull
+The server mounts an MCP endpoint at `/mcp`, exposing a `phoropter_query` tool
+(and `phoropter_list_corpora`). An MCP-capable model can call it directly to pull
 budgeted, right-sized context. See [mcp.md](mcp.md).
 
 ```bash
-phorapter mcp        # or run the MCP server over stdio for a local client
+phoropter mcp        # or run the MCP server over stdio for a local client
 ```
 
 ## Evaluate behavior on your corpus
 
 ```bash
-phorapter eval forest --url http://localhost:8000 --corpus docs --queries queries.jsonl
-phorapter eval budget --url http://localhost:8000 --corpus docs --queries queries.jsonl --budget 2000
+phoropter eval forest --url http://localhost:8000 --corpus docs --queries queries.jsonl
+phoropter eval budget --url http://localhost:8000 --corpus docs --queries queries.jsonl --budget 2000
 ```
 
 See [evaluation.md](evaluation.md).

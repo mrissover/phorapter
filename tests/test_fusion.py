@@ -1,8 +1,8 @@
 """Rank fusion: tier interleave ordering, tie stability, degradation."""
 
-from phorapter import DEFAULT_GRID, multi_view_slice
-from phorapter.fusion import RawScorePool, TierInterleave
-from phorapter.model import HitProvenance, RetrievedHit
+from phoropter import DEFAULT_GRID, multi_view_slice
+from phoropter.fusion import RawScorePool, TierInterleave
+from phoropter.model import HitProvenance, RetrievedHit
 
 DOC = multi_view_slice("doc-a", "x" * 4096, DEFAULT_GRID)
 

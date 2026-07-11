@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
-  title: Phorapter
+  title: Phoropter
   version: "1.0"
   description: |
-    Phorapter is a multi-view retrieval server. It indexes every document at
+    Phoropter is a multi-view retrieval server. It indexes every document at
     several slice sizes on a shared origin-aligned grid, and — given a query and
     an optional token budget — returns *right-sized* context: contained
     duplicates are discarded, and small hits are traded up to their enclosing

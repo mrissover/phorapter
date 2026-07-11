@@ -1,8 +1,8 @@
-# Phorapter
+# Phoropter
 
 **Right-sized retrieval context under a token budget.**
 
-Phorapter is a multi-view RAG server (and embeddable Python library) that indexes every
+Phoropter is a multi-view RAG server (and embeddable Python library) that indexes every
 document at multiple slice sizes on a shared origin-aligned grid. At query time it
 retrieves across all sizes, detects — *exactly, by construction* — when one retrieved
 slice is contained inside another, discards the redundant ones, and trades small slices
@@ -15,7 +15,7 @@ coherent context that fits the budget, with a full trace of every decision.
 
 Conventional RAG pipelines pick one chunk size at ingest time and live with it forever:
 small chunks match precisely but strip context, large chunks preserve context but crowd
-the model's window. Phorapter defers that choice to query time. Because every size is
+the model's window. Phoropter defers that choice to query time. Because every size is
 sliced on the same origin-aligned grid, a larger slice *provably* contains its smaller
 slices — containment is decided by offset arithmetic and verified by content hashes
 (SHA-256 markers), not by similarity heuristics. Swapping a small relevant slice for its
@@ -24,10 +24,10 @@ budgeting a sequence of safe, explainable moves.
 
 ## What ships
 
-- `pip install phorapter` — the core library: multi-size slicer, structural markers,
+- `pip install phoropter` — the core library: multi-size slicer, structural markers,
   containment forest, budget-fitting selection engine. Stdlib-only, synchronous, embeddable
   in any pipeline.
-- `pip install "phorapter[server,qdrant]"` — the server: FastAPI REST + MCP surfaces over
+- `pip install "phoropter[server,qdrant]"` — the server: FastAPI REST + MCP surfaces over
   a pluggable vector store (Qdrant default) and pluggable embedders (Ollama and
   OpenAI-compatible included).
 

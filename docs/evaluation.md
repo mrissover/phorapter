@@ -1,7 +1,7 @@
 # Evaluation
 
 The evaluation harness measures the *structure and budgeting behavior* of
-Phorapter on a real corpus — how dense and deep the containment forest is, how
+Phoropter on a real corpus — how dense and deep the containment forest is, how
 much of the token budget is used, and how much trade-up happens. It does **not**
 measure answer quality; that is a downstream, application-specific concern.
 
@@ -14,13 +14,13 @@ the same numbers every run — which is what makes regression detection meaningf
 
 ```bash
 # forest density: participation rate, chain depth, edge counts
-phorapter eval forest  --url http://localhost:8000 --corpus docs --queries queries.jsonl
+phoropter eval forest  --url http://localhost:8000 --corpus docs --queries queries.jsonl
 
 # budget behavior: results/query, trade-ups/query, utilization
-phorapter eval budget  --url http://localhost:8000 --corpus docs --queries queries.jsonl --budget 2000
+phoropter eval budget  --url http://localhost:8000 --corpus docs --queries queries.jsonl --budget 2000
 
 # regression: compare aggregates to a saved baseline; exit 1 on drift
-phorapter eval regress --url http://localhost:8000 --corpus docs --queries queries.jsonl \
+phoropter eval regress --url http://localhost:8000 --corpus docs --queries queries.jsonl \
     --budget 2000 --baseline eval/summary.json
 ```
 

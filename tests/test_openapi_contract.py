@@ -22,16 +22,16 @@ import schemathesis
 import yaml
 from hypothesis import HealthCheck, settings
 
-from phorapter.config import (
+from phoropter.config import (
     DefaultsSettings,
     EmbedderSettings,
     Settings,
     StoreSettings,
 )
-from phorapter.embed import FakeEmbedder
-from phorapter.server.rest import create_app
-from phorapter.service.core import ServiceCore
-from phorapter.stores.memory import InMemoryStore
+from phoropter.embed import FakeEmbedder
+from phoropter.server.rest import create_app
+from phoropter.service.core import ServiceCore
+from phoropter.stores.memory import InMemoryStore
 
 _CONTRACT_PATH = Path(__file__).resolve().parents[1] / "api" / "openapi.yaml"
 

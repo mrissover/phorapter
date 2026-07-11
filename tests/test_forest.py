@@ -4,9 +4,9 @@ import dataclasses
 
 import pytest
 
-from phorapter import DEFAULT_GRID, multi_view_slice
-from phorapter.forest import ContainmentForest, ForestError, contains
-from phorapter.model import HitProvenance, RetrievedHit
+from phoropter import DEFAULT_GRID, multi_view_slice
+from phoropter.forest import ContainmentForest, ForestError, contains
+from phoropter.model import HitProvenance, RetrievedHit
 
 
 def hit(doc, size, offset, score=1.0, rank=0):

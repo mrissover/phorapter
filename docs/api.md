@@ -1,6 +1,6 @@
 # REST API
 
-The REST surface lives under `/v1` and is served by `phorapter serve`. The
+The REST surface lives under `/v1` and is served by `phoropter serve`. The
 normative contract is [`api/openapi.yaml`](../api/openapi.yaml) (OpenAPI 3.1);
 this document is the narrative companion — semantics, the error taxonomy, and the
 partial-failure policy, with examples. The DTOs the server validates against are

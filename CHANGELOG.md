@@ -23,5 +23,5 @@ may change on minor versions).
   logging, optional bearer auth, and the `serve` / `mcp` / `check` CLI.
 - Operations: a Dockerfile (tiktoken vocabulary baked in), a dev docker-compose
   stack, and a PyPI trusted-publishing release workflow.
-- Evaluation harness (`phorapter eval forest|budget|regress`): forest-density and
+- Evaluation harness (`phoropter eval forest|budget|regress`): forest-density and
   budget-utilization metrics with deterministic regression gating.

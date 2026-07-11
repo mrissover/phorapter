@@ -14,7 +14,7 @@ from pathlib import Path
 
 import pytest
 
-from phorapter import GridSpec, multi_view_slice
+from phoropter import GridSpec, multi_view_slice
 
 pytestmark = pytest.mark.gate
 

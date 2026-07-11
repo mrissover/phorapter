@@ -20,7 +20,7 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from phorapter import GridSpec, SlicedDocument, multi_view_slice
+from phoropter import GridSpec, SlicedDocument, multi_view_slice
 
 pytestmark = pytest.mark.gate
 

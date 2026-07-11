@@ -4,18 +4,18 @@ import subprocess
 import sys
 import textwrap
 
-import phorapter
+import phoropter
 
 
 def test_version_is_exposed() -> None:
-    assert phorapter.__version__
-    assert phorapter.__version__ != "0.0.0"
+    assert phoropter.__version__
+    assert phoropter.__version__ != "0.0.0"
 
 
 def test_core_imports_without_tiktoken() -> None:
     """The core must import and run in a stripped environment.
 
-    tiktoken is masked in a subprocess; importing phorapter must succeed, and
+    tiktoken is masked in a subprocess; importing phoropter must succeed, and
     only the first count() on a tiktoken-backed counter may fail (with
     TokenizerError). This is the enforcement of the lazy-import policy — the
     import-linter contract alone cannot catch a hoisted module-level import.
@@ -25,9 +25,9 @@ def test_core_imports_without_tiktoken() -> None:
         import sys
         sys.modules["tiktoken"] = None  # mask: any `import tiktoken` now fails
 
-        import phorapter
-        from phorapter import GridSpec, get_counter, multi_view_slice
-        from phorapter.errors import TokenizerError
+        import phoropter
+        from phoropter import GridSpec, get_counter, multi_view_slice
+        from phoropter.errors import TokenizerError
 
         doc = multi_view_slice("d", "hello world", GridSpec((4, 8)))
         assert len(doc.slices) > 0

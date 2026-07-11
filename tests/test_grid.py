@@ -2,7 +2,7 @@
 
 import pytest
 
-from phorapter import DEFAULT_GRID, GridError, GridSpec
+from phoropter import DEFAULT_GRID, GridError, GridSpec
 
 
 class TestValidation:

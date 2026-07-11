@@ -2,24 +2,24 @@
 
 > Skeleton — sections marked *(planned)* are filled in as their milestones land.
 
-Phorapter is one package with two faces:
+Phoropter is one package with two faces:
 
-- **Core library** (`pip install phorapter`) — pure, synchronous, stdlib-only
+- **Core library** (`pip install phoropter`) — pure, synchronous, stdlib-only
   (sole runtime dependency: tiktoken, imported lazily). Embeddable in any
   pipeline in-process.
-- **Server** (`pip install "phorapter[server,qdrant]"`) — an async service layer
+- **Server** (`pip install "phoropter[server,qdrant]"`) — an async service layer
   with two thin skins, REST (FastAPI) and MCP (FastMCP), over pluggable vector
   stores and embedders.
 
 ```
-                pip install phorapter                      pip install "phorapter[server]"
+                pip install phoropter                      pip install "phoropter[server]"
  ┌─────────────────────────────────────────────┐   ┌──────────────────────────────────────┐
  │ CORE (stdlib-only, sync, I/O-free)          │   │ SERVER                               │
  │  grid.py      GridSpec (validated,          │   │  FastAPI /v1 REST ──┐                │
  │               fingerprint)                  │   │  FastMCP tools ─────┤ zero business  │
  │  slicer.py    multi_view_slice()            │   │                     │ logic in skins │
  │  markers.py   sha256(UTF-8), no-normalize   │   │        ServiceCore (async)           │
- │  ids.py       UUIDv5(PHORAPTER_NAMESPACE)   │   │   CorpusService / DocumentService /  │
+ │  ids.py       UUIDv5(PHOROPTER_NAMESPACE)   │   │   CorpusService / DocumentService /  │
  │  forest.py    containment forest            │   │   QueryService                       │
  │  fusion.py    cross-size rank fusion        │   │        │                 │           │
  │  selection.py SelectionStrategy SPI +       │◄──┤  VectorStoreAdapter   Embedder SPI   │

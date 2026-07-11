@@ -5,13 +5,13 @@ dependency (tiktoken). Use it to slice documents, detect containment, and
 right-size a set of retrieved hits under a token budget, in process.
 
 ```bash
-pip install phorapter
+pip install phoropter
 ```
 
 ## Slice a document
 
 ```python
-from phorapter import multi_view_slice, DEFAULT_GRID
+from phoropter import multi_view_slice, DEFAULT_GRID
 
 doc = multi_view_slice("handbook", open("handbook.txt").read(), DEFAULT_GRID)
 print(len(doc.slices), "slices across", DEFAULT_GRID.sizes, "code-point sizes")
@@ -32,7 +32,7 @@ slices up to their enclosing parents while the budget allows, returning the
 selected slices and a full decision trace.
 
 ```python
-from phorapter import budget_fit, RetrievedHit, HitProvenance
+from phoropter import budget_fit, RetrievedHit, HitProvenance
 
 # Build RetrievedHit objects from your store's results (one per retrieved slice).
 hits = [
@@ -62,7 +62,7 @@ un-retrieved enclosing slices, pass a `SliceSource` — for example an
 `get_slices(refs, *, corpus)` method:
 
 ```python
-from phorapter.stores.memory import InMemoryStore
+from phoropter.stores.memory import InMemoryStore
 
 store = InMemoryStore()          # populated with your slices+vectors at ingest
 selection = budget_fit(hits, budget=2000, source=store)

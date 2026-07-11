@@ -1,8 +1,8 @@
 """Server unit tests over the in-memory store and the fake embedder (no Docker).
 
 These run in the default lane. They exercise the full REST lifecycle through a
-FastAPI ``TestClient`` backed by :class:`~phorapter.stores.memory.InMemoryStore`
-and :class:`~phorapter.embed.FakeEmbedder`, plus the MCP surface via the
+FastAPI ``TestClient`` backed by :class:`~phoropter.stores.memory.InMemoryStore`
+and :class:`~phoropter.embed.FakeEmbedder`, plus the MCP surface via the
 in-memory FastMCP client, the error envelope shapes, and optional bearer auth.
 """
 
@@ -11,7 +11,7 @@ from __future__ import annotations
 import pytest
 from fastapi.testclient import TestClient
 
-from phorapter.config import (
+from phoropter.config import (
     DefaultsSettings,
     EmbedderSettings,
     McpSettings,
@@ -19,10 +19,10 @@ from phorapter.config import (
     Settings,
     StoreSettings,
 )
-from phorapter.embed import FakeEmbedder
-from phorapter.server.rest import create_app
-from phorapter.service.core import ServiceCore
-from phorapter.stores.memory import InMemoryStore
+from phoropter.embed import FakeEmbedder
+from phoropter.server.rest import create_app
+from phoropter.service.core import ServiceCore
+from phoropter.stores.memory import InMemoryStore
 
 DIM = 32
 GRID = (64, 128, 256)
@@ -74,7 +74,7 @@ def test_info(client: TestClient) -> None:
     r = client.get("/v1/info")
     assert r.status_code == 200
     body = r.json()
-    assert body["name"] == "phorapter"
+    assert body["name"] == "phoropter"
     assert "memory" in body["stores_available"]
     assert "fake" in body["embedders_available"]
 
@@ -369,7 +369,7 @@ def test_auth_enforced_when_key_set() -> None:
 async def test_mcp_query_and_list_roundtrip() -> None:
     from fastmcp import Client
 
-    from phorapter.server.mcp import build_mcp
+    from phoropter.server.mcp import build_mcp
 
     settings = _settings()
     core = ServiceCore(store=InMemoryStore(), embedder=FakeEmbedder(DIM), settings=settings)
@@ -379,16 +379,16 @@ async def test_mcp_query_and_list_roundtrip() -> None:
     mcp = build_mcp(core)
     async with Client(mcp) as mc:
         names = {t.name for t in await mc.list_tools()}
-        assert {"phorapter_query", "phorapter_list_corpora"} <= names
+        assert {"phoropter_query", "phoropter_list_corpora"} <= names
         # Write tools are OFF by default.
-        assert "phorapter_add_document" not in names
-        assert "phorapter_delete_document" not in names
+        assert "phoropter_add_document" not in names
+        assert "phoropter_delete_document" not in names
 
-        listed = await mc.call_tool("phorapter_list_corpora", {})
+        listed = await mc.call_tool("phoropter_list_corpora", {})
         assert listed.data == {"corpora": ["docs"]}
 
         result = await mc.call_tool(
-            "phorapter_query", {"corpus": "docs", "query": "fox", "token_budget": 500}
+            "phoropter_query", {"corpus": "docs", "query": "fox", "token_budget": 500}
         )
         data = result.data
         assert data["corpus"] == "docs"
@@ -399,7 +399,7 @@ async def test_mcp_query_and_list_roundtrip() -> None:
 async def test_mcp_write_tools_registered_when_enabled() -> None:
     from fastmcp import Client
 
-    from phorapter.server.mcp import build_mcp
+    from phoropter.server.mcp import build_mcp
 
     settings = _settings(mcp=McpSettings(enable_document_tools=True))
     core = ServiceCore(store=InMemoryStore(), embedder=FakeEmbedder(DIM), settings=settings)
@@ -408,10 +408,10 @@ async def test_mcp_write_tools_registered_when_enabled() -> None:
     mcp = build_mcp(core)
     async with Client(mcp) as mc:
         names = {t.name for t in await mc.list_tools()}
-        assert "phorapter_add_document" in names
-        assert "phorapter_delete_document" in names
+        assert "phoropter_add_document" in names
+        assert "phoropter_delete_document" in names
         await mc.call_tool(
-            "phorapter_add_document",
+            "phoropter_add_document",
             {"corpus": "docs", "document_id": "d1", "text": "hello world"},
         )
         rec = await core.documents.get("docs", "d1")

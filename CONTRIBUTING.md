@@ -1,4 +1,4 @@
-# Contributing to Phorapter
+# Contributing to Phoropter
 
 Thanks for your interest! This document covers the development workflow, the test
 tiers (including the gates that block everything else), and the documentation policy.
@@ -6,7 +6,7 @@ tiers (including the gates that block everything else), and the documentation po
 ## Development setup
 
 ```bash
-git clone <repo-url> && cd phorapter
+git clone <repo-url> && cd phoropter
 python -m venv .venv
 # Windows: .venv\Scripts\activate    POSIX: source .venv/bin/activate
 pip install -e . --group dev
@@ -45,7 +45,7 @@ lint-imports   # core-purity contract: core modules import stdlib only
 The import-linter contract enforces that the core (`grid`, `slicer`, `markers`, `ids`,
 `model`, `forest`, `fusion`, `selection`, `trace`, `tokens`, `stores.memory`) never
 imports the server stack or third-party frameworks. The single sanctioned exception is
-`phorapter.tokens` → tiktoken, which must stay *lazy inside functions*; that laziness is
+`phoropter.tokens` → tiktoken, which must stay *lazy inside functions*; that laziness is
 enforced by a stripped-environment test (`test_core_imports_without_tiktoken`), since the
 import contract alone cannot distinguish lazy from module-level imports.
 
@@ -56,7 +56,7 @@ import contract alone cannot distinguish lazy from module-level imports.
 
 ```bash
 cd <slicing-proof> && ./mvnw test -Dtest=ParityFixtureEmitterTest
-cp target/parity-fixtures/*.json <phorapter>/tests/fixtures/parity/
+cp target/parity-fixtures/*.json <phoropter>/tests/fixtures/parity/
 ```
 
 Each fixture records the git SHA of the reference commit that generated it
@@ -65,7 +65,7 @@ only when the reference slicer intentionally changes, and note the new SHA in th
 
 ## Generated code
 
-`src/phorapter/server/schemas.py` is **generated** from `api/openapi.yaml` (the REST
+`src/phoropter/server/schemas.py` is **generated** from `api/openapi.yaml` (the REST
 contract of record) via `hatch run codegen`. Never edit it by hand; change the contract
 and regenerate. Hand-written request/response mapping lives in `server/mappers.py`.
 CI fails if the running app's OpenAPI output diverges from the authored contract.

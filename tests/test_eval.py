@@ -8,7 +8,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from phorapter.eval.harness import (
+from phoropter.eval.harness import (
     QueryEval,
     aggregate,
     compare_baseline,
@@ -94,11 +94,11 @@ class TestRegression:
 class TestEndToEnd:
     async def test_evaluate_against_in_process_app(self) -> None:
         # A real app (in-memory store + fake embedder) driven over ASGI — no network.
-        from phorapter.config import Settings
-        from phorapter.embed import FakeEmbedder
-        from phorapter.server.rest import create_app
-        from phorapter.service.core import ServiceCore
-        from phorapter.stores.memory import InMemoryStore
+        from phoropter.config import Settings
+        from phoropter.embed import FakeEmbedder
+        from phoropter.server.rest import create_app
+        from phoropter.service.core import ServiceCore
+        from phoropter.stores.memory import InMemoryStore
 
         settings = Settings(store={"kind": "memory"}, embedder={"provider": "fake"})
         core = ServiceCore(

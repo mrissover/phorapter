@@ -1,4 +1,4 @@
-# Local development stack: Qdrant + Ollama + phorapter.
+# Local development stack: Qdrant + Ollama + phoropter.
 # Bring it up with `docker compose -f docker-compose.dev.yml up`.
 # The one-shot `ollama-pull` service pulls the default embedding model, then exits.
 
@@ -27,7 +27,7 @@ services:
     entrypoint: ["/bin/sh", "-c", "sleep 3 && ollama pull nomic-embed-text"]
     restart: "no"
 
-  phorapter:
+  phoropter:
     build: .
     depends_on:
       - qdrant
@@ -35,10 +35,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      PHORAPTER_STORE__URL: http://qdrant:6333
-      PHORAPTER_EMBEDDER__PROVIDER: ollama
-      PHORAPTER_EMBEDDER__MODEL: nomic-embed-text
-      PHORAPTER_EMBEDDER__BASE_URL: http://ollama:11434
+      PHOROPTER_STORE__URL: http://qdrant:6333
+      PHOROPTER_EMBEDDER__PROVIDER: ollama
+      PHOROPTER_EMBEDDER__MODEL: nomic-embed-text
+      PHOROPTER_EMBEDDER__BASE_URL: http://ollama:11434
 
 volumes:
   qdrant_data:

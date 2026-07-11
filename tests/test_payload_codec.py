@@ -4,8 +4,8 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from phorapter.markers import marker_for_text
-from phorapter.stores import pack_markers, unpack_markers
+from phoropter.markers import marker_for_text
+from phoropter.stores import pack_markers, unpack_markers
 
 hex_marker = st.text(alphabet="0123456789abcdef", min_size=64, max_size=64)
 

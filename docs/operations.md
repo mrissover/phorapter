@@ -1,20 +1,20 @@
 # Operations
 
-How to configure, deploy, and run a Phorapter server.
+How to configure, deploy, and run a Phoropter server.
 
 ## Configuration
 
 Settings come from three sources, highest precedence first: explicit values,
-environment variables prefixed `PHORAPTER_`, then an optional `phorapter.toml` in
+environment variables prefixed `PHOROPTER_`, then an optional `phoropter.toml` in
 the working directory. Nested fields use a double underscore in the environment,
-e.g. `PHORAPTER_STORE__URL`.
+e.g. `PHOROPTER_STORE__URL`.
 
 | Section | Key | Default | Meaning |
 |---|---|---|---|
 | `server` | `host` / `port` | `127.0.0.1` / `8000` | bind address |
 | `server` | `api_key` | (unset) | if set, all `/v1` routes require `Authorization: Bearer <key>` |
 | `store` | `kind` | `qdrant` | store adapter name (`qdrant`, `memory`, or a plugin) |
-| `store` | `url` / `api_key` / `prefix` | `http://localhost:6333` / – / `phorapter` | Qdrant connection and collection namespace |
+| `store` | `url` / `api_key` / `prefix` | `http://localhost:6333` / – / `phoropter` | Qdrant connection and collection namespace |
 | `store` | `search_timeout_s` | `5` | per-size search timeout |
 | `embedder` | `provider` / `model` | `ollama` / `nomic-embed-text` | embedder (`ollama`, `openai_compat`, `fake`, or a plugin) |
 | `embedder` | `base_url` / `api_key` | provider default | endpoint and credential |
@@ -33,10 +33,10 @@ Changing a default never affects an existing corpus.
 ## Running
 
 ```bash
-phorapter serve          # REST API + MCP mounted at /mcp, under uvicorn
-phorapter mcp            # MCP server over stdio (for a local MCP client)
-phorapter check          # validate startup (store reachable, embedder probed); exit 0 or 1
-phorapter eval --help    # offline evaluation harness (see evaluation.md)
+phoropter serve          # REST API + MCP mounted at /mcp, under uvicorn
+phoropter mcp            # MCP server over stdio (for a local MCP client)
+phoropter check          # validate startup (store reachable, embedder probed); exit 0 or 1
+phoropter eval --help    # offline evaluation harness (see evaluation.md)
 ```
 
 `serve` reads the configured store and embedder, validates them at startup, and
@@ -48,7 +48,7 @@ healthcheck runs.
 The `Dockerfile` builds a wheel and installs it with the `server` and `qdrant`
 extras, bakes the default tiktoken vocabulary into the image (so budgeting works
 without network access), runs as a non-root user, and exposes port 8000. Its
-`HEALTHCHECK` runs `phorapter check`.
+`HEALTHCHECK` runs `phoropter check`.
 
 `docker-compose.dev.yml` brings up Qdrant, Ollama, a one-shot model pull, and the
 server together for local development:
@@ -57,8 +57,8 @@ server together for local development:
 docker compose -f docker-compose.dev.yml up --build
 ```
 
-In production, point `PHORAPTER_STORE__URL` at your Qdrant cluster and
-`PHORAPTER_EMBEDDER__*` at your embedding service. The server is stateless — all
+In production, point `PHOROPTER_STORE__URL` at your Qdrant cluster and
+`PHOROPTER_EMBEDDER__*` at your embedding service. The server is stateless — all
 corpus configuration lives in the store — so it scales horizontally behind a load
 balancer.
 
@@ -80,7 +80,7 @@ belong in a reverse proxy or API gateway in front of the server.
 ## Logging
 
 Logs are structured (one JSON object per line by default; set
-`PHORAPTER_LOGGING__JSON=false` for human-readable). Each request logs its method,
+`PHOROPTER_LOGGING__JSON=false` for human-readable). Each request logs its method,
 path, status, duration, and a `request_id` that is also returned in the
 `X-Request-Id` response header and echoed in error envelopes for correlation.
 

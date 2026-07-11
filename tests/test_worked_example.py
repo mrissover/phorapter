@@ -55,9 +55,9 @@ from __future__ import annotations
 
 import dataclasses
 
-from phorapter import DEFAULT_GRID, multi_view_slice
-from phorapter.model import HitProvenance, RetrievedHit
-from phorapter.selection import budget_fit
+from phoropter import DEFAULT_GRID, multi_view_slice
+from phoropter.model import HitProvenance, RetrievedHit
+from phoropter.selection import budget_fit
 
 HB = multi_view_slice("hb", "x" * 1024, DEFAULT_GRID)
 FAQ = multi_view_slice("faq", "y" * 256, DEFAULT_GRID)

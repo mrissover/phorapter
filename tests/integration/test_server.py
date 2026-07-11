@@ -23,16 +23,16 @@ from collections.abc import AsyncIterator, Iterator
 import pytest
 from fastapi.testclient import TestClient
 
-from phorapter.config import (
+from phoropter.config import (
     DefaultsSettings,
     EmbedderSettings,
     McpSettings,
     Settings,
     StoreSettings,
 )
-from phorapter.embed import FakeEmbedder
-from phorapter.server.rest import create_app
-from phorapter.service.core import ServiceCore
+from phoropter.embed import FakeEmbedder
+from phoropter.server.rest import create_app
+from phoropter.service.core import ServiceCore
 
 pytestmark = pytest.mark.integration
 
@@ -75,7 +75,7 @@ def _settings(qdrant_url: str, *, prefix: str, **overrides: object) -> Settings:
 
 @contextlib.asynccontextmanager
 async def _core(settings: Settings, *, dimension: int = DIM) -> AsyncIterator[ServiceCore]:
-    from phorapter.config import build_store
+    from phoropter.config import build_store
 
     store = build_store(settings)
     core = ServiceCore(store=store, embedder=FakeEmbedder(dimension), settings=settings)
@@ -218,7 +218,7 @@ async def test_embedder_mismatch_on_wrong_dimension(qdrant_url: str) -> None:
 async def test_mcp_roundtrip_and_write_tools_gated(qdrant_url: str) -> None:
     from fastmcp import Client
 
-    from phorapter.server.mcp import build_mcp
+    from phoropter.server.mcp import build_mcp
 
     settings = _settings(qdrant_url, prefix=_prefix(), mcp=McpSettings(enable_document_tools=False))
     async with _core(settings) as core:
@@ -228,14 +228,14 @@ async def test_mcp_roundtrip_and_write_tools_gated(qdrant_url: str) -> None:
         mcp = build_mcp(core)
         async with Client(mcp) as mc:
             names = {t.name for t in await mc.list_tools()}
-            assert {"phorapter_query", "phorapter_list_corpora"} <= names
-            assert "phorapter_add_document" not in names  # gated off
+            assert {"phoropter_query", "phoropter_list_corpora"} <= names
+            assert "phoropter_add_document" not in names  # gated off
 
-            listed = await mc.call_tool("phorapter_list_corpora", {})
+            listed = await mc.call_tool("phoropter_list_corpora", {})
             assert listed.data == {"corpora": ["docs"]}
 
             result = await mc.call_tool(
-                "phorapter_query", {"corpus": "docs", "query": "fox", "token_budget": 500}
+                "phoropter_query", {"corpus": "docs", "query": "fox", "token_budget": 500}
             )
             assert result.data["corpus"] == "docs"
             assert result.data["text"]

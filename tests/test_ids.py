@@ -2,7 +2,7 @@
 
 import uuid
 
-from phorapter import PHORAPTER_NAMESPACE, slice_name, slice_uuid
+from phoropter import PHOROPTER_NAMESPACE, slice_name, slice_uuid
 
 
 def test_stdlib_uuid5_matches_rfc4122_appendix_vector() -> None:
@@ -13,13 +13,13 @@ def test_stdlib_uuid5_matches_rfc4122_appendix_vector() -> None:
 
 
 def test_namespace_value_and_provenance() -> None:
-    assert uuid.UUID("d90d882b-2065-5bad-a28e-6c0d117fcfb3") == PHORAPTER_NAMESPACE
-    assert uuid.uuid5(uuid.NAMESPACE_DNS, "phorapter.impluvium.software") == PHORAPTER_NAMESPACE
+    assert uuid.UUID("fabb402a-1e0f-55a8-83cd-2d0a124a3fca") == PHOROPTER_NAMESPACE
+    assert uuid.uuid5(uuid.NAMESPACE_DNS, "phoropter.impluvium.software") == PHOROPTER_NAMESPACE
 
 
 def test_pinned_slice_uuids() -> None:
-    assert slice_uuid("doc-1", 64, 0) == uuid.UUID("f6c3ca8b-520b-5113-9540-09f1713fce01")
-    assert slice_uuid("doc-1", 128, 0) == uuid.UUID("292390be-5fc6-5e93-9301-80230a84f124")
+    assert slice_uuid("doc-1", 64, 0) == uuid.UUID("e7e09240-3782-55fa-aaa9-327955e17cdc")
+    assert slice_uuid("doc-1", 128, 0) == uuid.UUID("9a5a1a5e-5b61-56cc-9722-8d97e68129a7")
 
 
 def test_same_coordinates_same_uuid() -> None:

@@ -1,6 +1,6 @@
 # The right-sizing engine
 
-This is the normative specification of Phorapter's query-time engine: how a query
+This is the normative specification of Phoropter's query-time engine: how a query
 and a token budget become a right-sized set of context slices, with a full trace
 of every decision. Everything here is deterministic and pure — given the same
 inputs, the same output and the same trace, byte for byte.

@@ -3,10 +3,10 @@
 import httpx
 import pytest
 
-from phorapter.embed import FakeEmbedder, create_embedder, default_registry
-from phorapter.embed.ollama import OllamaEmbedder
-from phorapter.embed.openai_compat import OpenAICompatEmbedder
-from phorapter.errors import EmbedderError
+from phoropter.embed import FakeEmbedder, create_embedder, default_registry
+from phoropter.embed.ollama import OllamaEmbedder
+from phoropter.embed.openai_compat import OpenAICompatEmbedder
+from phoropter.errors import EmbedderError
 
 # asyncio_mode = "auto" (pyproject) runs async test functions without per-test marks.
 
