@@ -13,13 +13,13 @@ def test_stdlib_uuid5_matches_rfc4122_appendix_vector() -> None:
 
 
 def test_namespace_value_and_provenance() -> None:
-    assert uuid.UUID("fabb402a-1e0f-55a8-83cd-2d0a124a3fca") == PHOROPTER_NAMESPACE
-    assert uuid.uuid5(uuid.NAMESPACE_DNS, "phoropter.impluvium.software") == PHOROPTER_NAMESPACE
+    assert uuid.UUID("8cf4930b-46ed-52c5-afc3-66aa6543e8fd") == PHOROPTER_NAMESPACE
+    assert uuid.uuid5(uuid.NAMESPACE_DNS, "phoropter.impluvium") == PHOROPTER_NAMESPACE
 
 
 def test_pinned_slice_uuids() -> None:
-    assert slice_uuid("doc-1", 64, 0) == uuid.UUID("e7e09240-3782-55fa-aaa9-327955e17cdc")
-    assert slice_uuid("doc-1", 128, 0) == uuid.UUID("9a5a1a5e-5b61-56cc-9722-8d97e68129a7")
+    assert slice_uuid("doc-1", 64, 0) == uuid.UUID("3cdb9ba7-e0bb-55f3-a800-d7a28baade29")
+    assert slice_uuid("doc-1", 128, 0) == uuid.UUID("e5a4aaa4-c833-50be-a86d-fe786bc0dc16")
 
 
 def test_same_coordinates_same_uuid() -> None:
