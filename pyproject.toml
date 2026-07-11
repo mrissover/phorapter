@@ -58,19 +58,24 @@ qdrant = "phorapter.stores.qdrant:QdrantStore"
 ollama = "phorapter.embed.ollama:OllamaEmbedder"
 openai_compat = "phorapter.embed.openai_compat:OpenAICompatEmbedder"
 
+# Dev tools carry upper bounds so a new tool release cannot turn CI red without a
+# deliberate bump. ruff is pinned to a minor (it is pre-1.0; its lint rules and
+# formatter change between minors); the rest are capped below the next major.
+# Floors track the versions CI and local development are verified against, so a
+# plain `pip install --group dev` resolves both to the same tools.
 [dependency-groups]
 dev = [
-  "pytest>=8.3",
-  "pytest-asyncio>=0.24",
-  "hypothesis>=6.115",
-  "ruff>=0.8",
-  "mypy>=1.13",
-  "import-linter>=2.1",
-  "pre-commit>=4.0",
-  "datamodel-code-generator>=0.26",
-  "schemathesis>=3.38",
-  "hatch>=1.13",
-  "testcontainers>=4.8",
+  "pytest>=8.3,<10",
+  "pytest-asyncio>=1.0,<2",
+  "hypothesis>=6.115,<7",
+  "ruff>=0.15,<0.16",
+  "mypy>=2.2,<3",
+  "import-linter>=2.1,<3",
+  "pre-commit>=4.0,<5",
+  "datamodel-code-generator>=0.26,<1",
+  "schemathesis>=4.0,<5",
+  "hatch>=1.13,<2",
+  "testcontainers>=4.8,<5",
 ]
 
 [tool.hatch.build.targets.wheel]
